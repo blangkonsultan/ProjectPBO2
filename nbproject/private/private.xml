@@ -3,15 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/SourceCode/form_home_admin.java</file>
-            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/SourceCode/dialog_kelolaBuku.java</file>
-            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/SourceCode/dialog_cetakLaporanMahasiswa.java</file>
-            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/SourceCode/dialog_kelolaMahasiswa.java</file>
-            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/SourceCode/form_login.java</file>
-            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/SourceCode/dialog_cetakLaporanBuku.java</file>
-            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/SourceCode/dialog_cetakLaporanPeminjaman.java</file>
-            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/SourceCode/form_home_Manager.java</file>
-            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/SourceCode/dialog_kelolaPeminjaman.java</file>
+            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/view/view_dialog_cetakLaporanPeminjaman.java</file>
+            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/model/koneksi.java</file>
+            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/view/view_form_home_admin.java</file>
+            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/view/view_dialog_cetakLaporanBuku.java</file>
+            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/controller/c_form_login.java</file>
+            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/view/view_dialog_kelolaMahasiswa.java</file>
+            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/view/view_dialog_kelolaPeminjaman.java</file>
+            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/view/view_dialog_cetakLaporanMahasiswa.java</file>
+            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/view/view_dialog_kelolaBuku.java</file>
+            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/view/view_form_login.java</file>
+            <file>file:/D:/Tugas/Semester%204/PBO%202/BismillahProjectPerpustakaan/src/model/m_login.java</file>
         </group>
     </open-files>
 </project-private>
