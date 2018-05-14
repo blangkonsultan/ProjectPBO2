@@ -95,6 +95,11 @@ public class view_dialog_cetakLaporanBuku extends java.awt.Dialog {
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 780, 280));
 
         Button_cetak.setText("Cetak");
+        Button_cetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_cetakActionPerformed(evt);
+            }
+        });
         add(Button_cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(711, 403, 70, 30));
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/bg_cetakLaporanBuku.png"))); // NOI18N
@@ -110,6 +115,13 @@ public class view_dialog_cetakLaporanBuku extends java.awt.Dialog {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_closeDialog
+
+    private void Button_cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_cetakActionPerformed
+        try {
+            
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_Button_cetakActionPerformed
 
     /**
      * @param args the command line arguments

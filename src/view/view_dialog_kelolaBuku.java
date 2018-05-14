@@ -78,9 +78,33 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Penerbit");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+
+        TextField_Penerbit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TextField_PenerbitKeyTyped(evt);
+            }
+        });
         jPanel1.add(TextField_Penerbit, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 160, -1));
+
+        TextField_IdBuku.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TextField_IdBukuKeyTyped(evt);
+            }
+        });
         jPanel1.add(TextField_IdBuku, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 160, -1));
+
+        TextField_JudulBuku.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TextField_JudulBukuKeyTyped(evt);
+            }
+        });
         jPanel1.add(TextField_JudulBuku, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 160, -1));
+
+        TextField_Pengarang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TextField_PengarangKeyTyped(evt);
+            }
+        });
         jPanel1.add(TextField_Pengarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 160, -1));
 
         Button_Perbarui.setText("Perbarui");
@@ -110,6 +134,12 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("Tahun Terbit");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+
+        TextField_Stok.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TextField_StokKeyTyped(evt);
+            }
+        });
         jPanel1.add(TextField_Stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 60, -1));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 280, 320));
@@ -183,6 +213,32 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_closeDialog
+
+    private void TextField_IdBukuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_IdBukuKeyTyped
+
+    }//GEN-LAST:event_TextField_IdBukuKeyTyped
+
+    private void TextField_JudulBukuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_JudulBukuKeyTyped
+
+    }//GEN-LAST:event_TextField_JudulBukuKeyTyped
+
+    private void TextField_PengarangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_PengarangKeyTyped
+        if (!Character.isAlphabetic(evt.getKeyChar()) && !Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_TextField_PengarangKeyTyped
+
+    private void TextField_PenerbitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_PenerbitKeyTyped
+        if (!Character.isAlphabetic(evt.getKeyChar()) && !Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TextField_PenerbitKeyTyped
+
+    private void TextField_StokKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_StokKeyTyped
+        if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TextField_StokKeyTyped
 
     /**
      * @param args the command line arguments

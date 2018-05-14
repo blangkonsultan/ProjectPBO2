@@ -5,6 +5,8 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Bagas
@@ -123,6 +125,11 @@ public class view_form_home_admin extends javax.swing.JFrame {
         Button_SearchBuku.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/search.png"))); // NOI18N
         Button_SearchBuku.setBorderPainted(false);
         Button_SearchBuku.setContentAreaFilled(false);
+        Button_SearchBuku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_SearchBukuActionPerformed(evt);
+            }
+        });
         Panel_Data_Buku.add(Button_SearchBuku, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 10, 20, 20));
 
         Button_EditBuku.setText("Edit");
@@ -146,6 +153,11 @@ public class view_form_home_admin extends javax.swing.JFrame {
 
         Button_SegarkanBuku.setText("Segarkan");
         Button_SegarkanBuku.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Button_SegarkanBuku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_SegarkanBukuActionPerformed(evt);
+            }
+        });
         Panel_Data_Buku.add(Button_SegarkanBuku, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 400, 100, 30));
 
         TabbedPane_home_Admin.addTab("Data Buku", Panel_Data_Buku);
@@ -388,7 +400,7 @@ public class view_form_home_admin extends javax.swing.JFrame {
     }//GEN-LAST:event_Button_CetakMahasiswaActionPerformed
 
     private void Button_CetakBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CetakBukuActionPerformed
-        new view_dialog_cetakLaporanBuku(this, rootPaneCheckingEnabled).setVisible(true);;
+        new view_dialog_cetakLaporanBuku(this, rootPaneCheckingEnabled).setVisible(true);
    
     }//GEN-LAST:event_Button_CetakBukuActionPerformed
 
@@ -398,9 +410,27 @@ public class view_form_home_admin extends javax.swing.JFrame {
     }//GEN-LAST:event_Button_CetakPeminjamanActionPerformed
 
     private void Button_LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_LogoutActionPerformed
+        try {
         new view_form_login().setVisible(true);
         dispose();
+           
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(rootPane, "Tidak ada koneksi");
+        }
     }//GEN-LAST:event_Button_LogoutActionPerformed
+
+    private void Button_SearchBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_SearchBukuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Button_SearchBukuActionPerformed
+
+    private void Button_SegarkanBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_SegarkanBukuActionPerformed
+        try {
+            
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(rootPane, "Error OM");
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Button_SegarkanBukuActionPerformed
 
     /**
      * @param args the command line arguments

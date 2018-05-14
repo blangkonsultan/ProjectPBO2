@@ -68,7 +68,19 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Tanggal Pinjam");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        TextField_NIM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TextField_NIMKeyTyped(evt);
+            }
+        });
         jPanel1.add(TextField_NIM, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 160, -1));
+
+        TextField_IdBuku.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TextField_IdBukuKeyTyped(evt);
+            }
+        });
         jPanel1.add(TextField_IdBuku, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 160, -1));
 
         Button_Perbarui.setText("Perbarui");
@@ -161,6 +173,18 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_closeDialog
+
+    private void TextField_NIMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_NIMKeyTyped
+        if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TextField_NIMKeyTyped
+
+    private void TextField_IdBukuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_IdBukuKeyTyped
+        if (!Character.isAlphabetic(evt.getKeyChar()) && !Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TextField_IdBukuKeyTyped
 
     /**
      * @param args the command line arguments

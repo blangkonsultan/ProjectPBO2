@@ -17,6 +17,7 @@ public class view_form_login extends javax.swing.JFrame {
     public view_form_login() {
         initComponents();
         setLocationRelativeTo(this);
+        getPasswordField_Password();
     }
 
     /**
@@ -73,34 +74,46 @@ public class view_form_login extends javax.swing.JFrame {
     }//GEN-LAST:event_TextField_UsernameActionPerformed
 
     private void Button_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_LoginActionPerformed
-        user = TextField_Username.getText();
-        password = PasswordField_Password.getText();
-        if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")) {
-            new view_form_home_admin().setVisible(true);
-            dispose();
-        } else if (user.equalsIgnoreCase("manager") && password.equalsIgnoreCase("manager")) {
-            new view_form_home_Manager().setVisible(true);
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Password atau Username anda salah!!");
+        try {
+            user = TextField_Username.getText();
+            password = getPasswordField_Password();
+            if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")) {
+                new view_form_home_admin().setVisible(true);
+                dispose();
+            } else if (user.equalsIgnoreCase("manager") && password.equalsIgnoreCase("manager")) {
+                new view_form_home_Manager().setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Password atau Username anda salah!!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Tidak Adak Koneksi");
         }
+
     }//GEN-LAST:event_Button_LoginActionPerformed
 
     public String getUser() {
         return user;
     }
-    
-    public JButton getButton_Login(){
-    return Button_Login;
+
+    public JButton getButton_Login() {
+        return Button_Login;
     }
 
-    public JPasswordField getPasswordField_Password() {
-        return PasswordField_Password;
+    public String getPasswordField_Password() {
+        String pass = "";
+        char passArray[] = this.PasswordField_Password.getPassword();
+        for (int i = 0; i < passArray.length; i++) {
+            pass += passArray[i];
+        }
+
+        return pass;
     }
 
     public JTextField getTextField_Username() {
         return TextField_Username;
     }
+
     /**
      * @param args the command line arguments
      */

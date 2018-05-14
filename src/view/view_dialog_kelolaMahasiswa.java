@@ -74,8 +74,26 @@ public class view_dialog_kelolaMahasiswa extends java.awt.Dialog {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Tempat Lahir");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+
+        TextField_TempatLahir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TextField_TempatLahirKeyTyped(evt);
+            }
+        });
         jPanel1.add(TextField_TempatLahir, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 160, -1));
+
+        TextField_NIM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TextField_NIMKeyTyped(evt);
+            }
+        });
         jPanel1.add(TextField_NIM, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 160, -1));
+
+        TextField_NamaLengkap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TextField_NamaLengkapKeyTyped(evt);
+            }
+        });
         jPanel1.add(TextField_NamaLengkap, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 160, -1));
 
         Button_Perbarui.setText("Perbarui");
@@ -169,6 +187,24 @@ public class view_dialog_kelolaMahasiswa extends java.awt.Dialog {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_closeDialog
+
+    private void TextField_NIMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_NIMKeyTyped
+        if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TextField_NIMKeyTyped
+
+    private void TextField_NamaLengkapKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_NamaLengkapKeyTyped
+        if (!Character.isAlphabetic(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TextField_NamaLengkapKeyTyped
+
+    private void TextField_TempatLahirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_TempatLahirKeyTyped
+        if (Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TextField_TempatLahirKeyTyped
 
     /**
      * @param args the command line arguments
