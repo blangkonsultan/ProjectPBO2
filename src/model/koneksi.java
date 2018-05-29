@@ -1,34 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-/**
- *
- * @author eldi
- */
+
 public class koneksi {
+     private Connection con;
+    private Statement stm;
 
-    private static Connection connection = null;
-    
-    private final String url = "jdbc:postgresql://localhost:5432/perpustakaan";
-    private final String user = "postgres";
-    private final String password = "2796";
-
-    public Connection connect() {
-        try {
-            connection = DriverManager.getConnection(url, user, password);
-            System.out.println("koneksi berhasil");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        return connection;
+    public koneksi(String username, String password, String db) throws SQLException {
+        String url = "jdbc:postgresql://localhost:5432/" + db;
+        con = DriverManager.getConnection(url, username, password);
+        stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        
     }
 
+
+    public void execute(String sql) throws SQLException {
+        this.stm.executeUpdate(sql);
+    }
+
+    public ResultSet getResult(String sql) throws SQLException {
+       
+        return stm.executeQuery(sql);
+    }
+
+    public koneksi Koneksi() {
+        return (koneksi) con;
+    }
 }

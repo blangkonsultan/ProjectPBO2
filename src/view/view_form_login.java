@@ -5,19 +5,24 @@
  */
 package view;
 
+import com.sun.glass.events.KeyEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import model.koneksi;
 
 public class view_form_login extends javax.swing.JFrame {
-
-    String user, password;
 
     public view_form_login() {
         initComponents();
         setLocationRelativeTo(this);
-        getPasswordField_Password();
+
     }
 
     /**
@@ -45,10 +50,20 @@ public class view_form_login extends javax.swing.JFrame {
                 TextField_UsernameActionPerformed(evt);
             }
         });
+        TextField_Username.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TextField_UsernameKeyPressed(evt);
+            }
+        });
         getContentPane().add(TextField_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, 160, 30));
 
         PasswordField_Password.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PasswordField_Password.setMinimumSize(new java.awt.Dimension(5, 25));
+        PasswordField_Password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PasswordField_PasswordKeyPressed(evt);
+            }
+        });
         getContentPane().add(PasswordField_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 460, 160, 30));
 
         Button_Login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/button_login.png"))); // NOI18N
@@ -57,6 +72,11 @@ public class view_form_login extends javax.swing.JFrame {
         Button_Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Button_LoginActionPerformed(evt);
+            }
+        });
+        Button_Login.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Button_LoginKeyPressed(evt);
             }
         });
         getContentPane().add(Button_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 510, 100, 50));
@@ -74,30 +94,57 @@ public class view_form_login extends javax.swing.JFrame {
     }//GEN-LAST:event_TextField_UsernameActionPerformed
 
     private void Button_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_LoginActionPerformed
-        try {
-            user = TextField_Username.getText();
-            password = getPasswordField_Password();
-            if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")) {
-                new view_form_home_admin().setVisible(true);
-                dispose();
-            } else if (user.equalsIgnoreCase("manager") && password.equalsIgnoreCase("manager")) {
-                new view_form_home_Manager().setVisible(true);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Password atau Username anda salah!!");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Tidak Adak Koneksi");
-        }
+
 
     }//GEN-LAST:event_Button_LoginActionPerformed
 
-    public String getUser() {
-        return user;
-    }
+    private void Button_LoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Button_LoginKeyPressed
 
-    public JButton getButton_Login() {
-        return Button_Login;
+    }//GEN-LAST:event_Button_LoginKeyPressed
+
+    private void PasswordField_PasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PasswordField_PasswordKeyPressed
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            try {
+//                user = TextField_Username.getText();
+//                password = getPasswordField_Password();
+//                if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")) {
+//                    new view_form_home_admin().setVisible(true);
+//                    dispose();
+//                } else if (user.equalsIgnoreCase("manager") && password.equalsIgnoreCase("manager")) {
+//                    new view_form_home_Manager().setVisible(true);
+//                    dispose();
+//                } else {
+//                    JOptionPane.showMessageDialog(rootPane, "Password atau Username anda salah!!");
+//                }
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(rootPane, "Tidak Adak Koneksi");
+//            }
+//        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PasswordField_PasswordKeyPressed
+
+    private void TextField_UsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_UsernameKeyPressed
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            try {
+//                user = TextField_Username.getText();
+//                password = getPasswordField_Password();
+//                if (user.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")) {
+//                    new view_form_home_admin().setVisible(true);
+//                    dispose();
+//                } else if (user.equalsIgnoreCase("manager") && password.equalsIgnoreCase("manager")) {
+//                    new view_form_home_Manager().setVisible(true);
+//                    dispose();
+//                } else {
+//                    JOptionPane.showMessageDialog(rootPane, "Password atau Username anda salah!!");
+//                }
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(rootPane, "Tidak Adak Koneksi");
+//            }
+//        }
+    }//GEN-LAST:event_TextField_UsernameKeyPressed
+
+    public String getUser() {
+        return TextField_Username.getText();
     }
 
     public String getPasswordField_Password() {
@@ -110,45 +157,45 @@ public class view_form_login extends javax.swing.JFrame {
         return pass;
     }
 
-    public JTextField getTextField_Username() {
-        return TextField_Username;
+    public void loginListener(ActionListener l) {
+        this.Button_Login.addActionListener(l);
     }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(view_form_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(view_form_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(view_form_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(view_form_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new view_form_login().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(view_form_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(view_form_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(view_form_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(view_form_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new view_form_login().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;

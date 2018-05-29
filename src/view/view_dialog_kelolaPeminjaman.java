@@ -41,6 +41,8 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
         jLabel7 = new javax.swing.JLabel();
         DateChooser_TanggalPinjam = new com.toedter.calendar.JDateChooser();
         DateChooser_TanggalPengembalian = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        ComboBox_StatusPinjam = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         Table_DataPeminjaman = new javax.swing.JTable();
@@ -101,6 +103,12 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
         jPanel1.add(DateChooser_TanggalPinjam, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 120, -1));
         jPanel1.add(DateChooser_TanggalPengembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 120, -1));
 
+        jLabel1.setText("Status");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+
+        ComboBox_StatusPinjam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sudah Dikembalikan", "Belum Dikembalikan", " " }));
+        jPanel1.add(ComboBox_StatusPinjam, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 120, -1));
+
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 270, 320));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -110,43 +118,43 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
 
         Table_DataPeminjaman.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "NIM", "NAMA", "FAKUTAS", "ID BUKU", "JUDUL BUKU", "KATEGORI", "TANGGAL PINJAM", "TANGGAL PENGEMBALIAN"
+                "ID", "NIM", "NAMA", "FAKUTAS", "ID BUKU", "JUDUL BUKU", "KATEGORI", "TANGGAL PINJAM", "TANGGAL PENGEMBALIAN", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -189,19 +197,19 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                view_dialog_kelolaPeminjaman dialog = new view_dialog_kelolaPeminjaman(new java.awt.Frame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                view_dialog_kelolaPeminjaman dialog = new view_dialog_kelolaPeminjaman(new java.awt.Frame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -210,11 +218,13 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
     private javax.swing.JButton Button_Perbarui;
     private javax.swing.JButton Button_Segarkan;
     private javax.swing.JButton Button_Simpan;
+    private javax.swing.JComboBox<String> ComboBox_StatusPinjam;
     private com.toedter.calendar.JDateChooser DateChooser_TanggalPengembalian;
     private com.toedter.calendar.JDateChooser DateChooser_TanggalPinjam;
     private javax.swing.JTable Table_DataPeminjaman;
     private javax.swing.JTextField TextField_IdBuku;
     private javax.swing.JTextField TextField_NIM;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;

@@ -5,6 +5,8 @@
  */
 package view;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Bagas
@@ -319,6 +321,45 @@ public class view_form_home_Manager extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void CetakBukuListener(ActionListener l) {
+        this.Button_CetakBuku.addActionListener(l);
+    }
+
+    public void CetakMahasiswaListener(ActionListener l) {
+        this.Button_CetakMahasiswa.addActionListener(l);
+    }
+
+    public void CetakPeminjamanListener(ActionListener l) {
+        this.Button_CetakPeminjaman.addActionListener(l);
+    }
+
+    public void logoutListener(ActionListener l) {
+        this.Button_Logout.addActionListener(l);
+    }
+
+    public void SearchBukuListener(ActionListener l) {
+        this.Button_SearchBuku.addActionListener(l);
+    }
+
+    public void SearchMahasiswaListener(ActionListener l) {
+        this.Button_SearchMahasiswa.addActionListener(l);
+    }
+
+    public void SearchPeminjamanListener(ActionListener l) {
+        this.Button_SearchPeminjaman.addActionListener(l);
+    }
+
+    public void SegarkanBukuListener(ActionListener l) {
+        this.Button_SegarkanBuku.addActionListener(l);
+    }
+
+    public void SegarkanMahasiswaListener(ActionListener l) {
+        this.Button_SegarkanMahasiswa.addActionListener(l);
+    }
+
+    public void SegarkanPeminjamanListener(ActionListener l) {
+        this.Button_SegarkanPeminjaman.addActionListener(l);
+    }
     private void TextField_BukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_BukuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextField_BukuActionPerformed
@@ -332,8 +373,8 @@ public class view_form_home_Manager extends javax.swing.JFrame {
     }//GEN-LAST:event_TextField_cariMahasiswaActionPerformed
 
     private void Button_CetakBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CetakBukuActionPerformed
-       new view_dialog_cetakLaporanBuku(this, rootPaneCheckingEnabled).setVisible(true);
-   
+        new view_dialog_cetakLaporanBuku(this, rootPaneCheckingEnabled).setVisible(true);
+
     }//GEN-LAST:event_Button_CetakBukuActionPerformed
 
     private void Button_LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_LogoutActionPerformed
@@ -342,52 +383,50 @@ public class view_form_home_Manager extends javax.swing.JFrame {
     }//GEN-LAST:event_Button_LogoutActionPerformed
 
     private void Button_CetakPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CetakPeminjamanActionPerformed
-       new view_dialog_cetakLaporanPeminjaman(this, rootPaneCheckingEnabled).setVisible(true);
+        new view_dialog_cetakLaporanPeminjaman(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_Button_CetakPeminjamanActionPerformed
 
     private void Button_CetakMahasiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CetakMahasiswaActionPerformed
-     new view_dialog_cetakLaporanMahasiswa(this, rootPaneCheckingEnabled).setVisible(true);
+        new view_dialog_cetakLaporanMahasiswa(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_Button_CetakMahasiswaActionPerformed
-
-
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(view_form_home_Manager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(view_form_home_Manager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(view_form_home_Manager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(view_form_home_Manager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new view_form_home_Manager().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(view_form_home_Manager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(view_form_home_Manager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(view_form_home_Manager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(view_form_home_Manager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new view_form_home_Manager().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button_CetakBuku;
