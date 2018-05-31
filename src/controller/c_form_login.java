@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.koneksi;
 import model.m_admin;
 import model.m_login;
 import model.m_manager;
@@ -17,7 +18,8 @@ public class c_form_login {
 
     private view.view_form_login viewLogin;
     private model.m_login modelLogin;
-    private static String username;
+   private static String username;
+    private koneksi kon;
 
     public c_form_login(view_form_login viewLogin, m_login modelLogin) {
         this.viewLogin = viewLogin;
@@ -51,14 +53,14 @@ public class c_form_login {
                         viewLogin.dispose();
                         manager.setVisible(true);
                         m_manager model = new m_manager();
-                        c_manager control = new c_manager(model, manager);
+                        new c_manager(model, manager);
                     } else if (level == 2) {
                         JOptionPane.showMessageDialog(viewLogin, "selamat Datang " + username + " !");
                         view_form_home_admin admin = new view_form_home_admin();
                         viewLogin.dispose();
                         admin.setVisible(true);
-                        m_admin model = new m_admin();
-                        c_admin control = new c_admin(model, admin);
+                        m_admin model = new m_admin(kon);
+                        new c_admin(model, admin);
                     }
 
                 } else if ((viewLogin.getUser().equalsIgnoreCase("") || viewLogin.getPasswordField_Password().equalsIgnoreCase(""))) {

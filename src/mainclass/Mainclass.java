@@ -22,8 +22,8 @@ public class Mainclass {
     public static void main(String[] args) throws SQLException {
         view.view_form_login view = new view_form_login();
         model.m_login model = new m_login();
-        controller.c_form_login control = new c_form_login(view, model);
-//        view.setVisible(true);
+        new c_form_login(view, model);
+
     }
-    
+
 }

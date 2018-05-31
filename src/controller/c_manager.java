@@ -7,22 +7,27 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.m_login;
 import model.m_manager;
 import view.view_form_home_Manager;
+import view.view_form_login;
 
 /**
  *
  * @author Bagas
  */
 public class c_manager {
-    
+
     m_manager modelManager;
     view_form_home_Manager viewManager;
-    
+
     public c_manager(m_manager modelManager, view_form_home_Manager viewManager) {
         this.modelManager = modelManager;
         this.viewManager = viewManager;
-        
+
         viewManager.CetakBukuListener(new CetakBukuListener());
         viewManager.CetakMahasiswaListener(new CetakMahasiswaListener());
         viewManager.CetakPeminjamanListener(new CetakPeminjamanListener());
@@ -32,105 +37,125 @@ public class c_manager {
         viewManager.SegarkanBukuListener(new SegarkanBukuListener());
         viewManager.SegarkanMahasiswaListener(new SegarkanMahasiswaListener());
         viewManager.SegarkanPeminjamanListener(new SegarkanPeminjamanListener());
+        viewManager.logoutListener(new logoutListener());
     }
-    
-    private static class CetakBukuListener implements ActionListener {
-        
+
+    private class logoutListener implements ActionListener {
+
+        public logoutListener() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.view_form_login view = new view_form_login();
+            model.m_login model;
+            try {
+                model = new m_login();
+                new c_form_login(view, model);
+                viewManager.dispose();
+            } catch (SQLException ex) {
+                Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private class CetakBukuListener implements ActionListener {
+
         public CetakBukuListener() {
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
-    
-    private static class CetakMahasiswaListener implements ActionListener {
-        
+
+    private class CetakMahasiswaListener implements ActionListener {
+
         public CetakMahasiswaListener() {
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
-    
-    private static class CetakPeminjamanListener implements ActionListener {
-        
+
+    private class CetakPeminjamanListener implements ActionListener {
+
         public CetakPeminjamanListener() {
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
-    
-    private static class SearchBukuListener implements ActionListener {
-        
+
+    private class SearchBukuListener implements ActionListener {
+
         public SearchBukuListener() {
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
-    
-    private static class SearchMahasiswaListener implements ActionListener {
-        
+
+    private class SearchMahasiswaListener implements ActionListener {
+
         public SearchMahasiswaListener() {
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
-    
-    private static class SearchPeminjamanListener implements ActionListener {
-        
+
+    private class SearchPeminjamanListener implements ActionListener {
+
         public SearchPeminjamanListener() {
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
-    
-    private static class SegarkanBukuListener implements ActionListener {
-        
+
+    private class SegarkanBukuListener implements ActionListener {
+
         public SegarkanBukuListener() {
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
-    
-    private static class SegarkanMahasiswaListener implements ActionListener {
-        
+
+    private class SegarkanMahasiswaListener implements ActionListener {
+
         public SegarkanMahasiswaListener() {
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
-    
-    private static class SegarkanPeminjamanListener implements ActionListener {
-        
+
+    private class SegarkanPeminjamanListener implements ActionListener {
+
         public SegarkanPeminjamanListener() {
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
-    
+
 }

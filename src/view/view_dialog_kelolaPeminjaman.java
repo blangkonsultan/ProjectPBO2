@@ -46,6 +46,7 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         Table_DataPeminjaman = new javax.swing.JTable();
+        Button_pilih = new javax.swing.JButton();
         Background = new javax.swing.JLabel();
 
         setResizable(false);
@@ -164,7 +165,10 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
         Table_DataPeminjaman.setPreferredSize(new java.awt.Dimension(1300, 470));
         jScrollPane2.setViewportView(Table_DataPeminjaman);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 320));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 280));
+
+        Button_pilih.setText("Pilih");
+        jPanel2.add(Button_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 500, 320));
 
@@ -218,6 +222,7 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
     private javax.swing.JButton Button_Perbarui;
     private javax.swing.JButton Button_Segarkan;
     private javax.swing.JButton Button_Simpan;
+    private javax.swing.JButton Button_pilih;
     private javax.swing.JComboBox<String> ComboBox_StatusPinjam;
     private com.toedter.calendar.JDateChooser DateChooser_TanggalPengembalian;
     private com.toedter.calendar.JDateChooser DateChooser_TanggalPinjam;

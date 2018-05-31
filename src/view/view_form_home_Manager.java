@@ -378,8 +378,8 @@ public class view_form_home_Manager extends javax.swing.JFrame {
     }//GEN-LAST:event_Button_CetakBukuActionPerformed
 
     private void Button_LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_LogoutActionPerformed
-        new view_form_login().setVisible(true);
-        dispose();
+//        new view_form_login().setVisible(true);
+//        dispose();
     }//GEN-LAST:event_Button_LogoutActionPerformed
 
     private void Button_CetakPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CetakPeminjamanActionPerformed

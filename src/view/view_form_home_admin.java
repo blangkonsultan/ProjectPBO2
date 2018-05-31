@@ -5,8 +5,13 @@
  */
 package view;
 
+import controller.c_admin;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -371,6 +376,18 @@ public class view_form_home_admin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setTabel(DefaultTableModel tabel) {
+        this.Table_DataBuku.setModel(tabel);
+    }
+
+    public int getSelectedRow() {
+        return Table_DataBuku.getSelectedRow();
+    }
+
+    public String getValueAt(int baris, int kolom) {
+        return (String) this.Table_DataBuku.getValueAt(baris, kolom);
+    }
+
     public void CetakBukuListener(ActionListener l) {
         this.Button_CetakBuku.addActionListener(l);
     }
@@ -435,7 +452,7 @@ public class view_form_home_admin extends javax.swing.JFrame {
     }//GEN-LAST:event_TextField_cariMahasiswaActionPerformed
 
     private void Button_EditBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EditBukuActionPerformed
-        new view_dialog_kelolaBuku(this, rootPaneCheckingEnabled).setVisible(true);
+        //new view_dialog_kelolaBuku(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_Button_EditBukuActionPerformed
 
     private void Button_EditPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EditPeminjamanActionPerformed
@@ -461,14 +478,15 @@ public class view_form_home_admin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_Button_CetakPeminjamanActionPerformed
 
-    private void Button_LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_LogoutActionPerformed
-        try {
-            new view_form_login().setVisible(true);
-            dispose();
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Tidak ada koneksi");
-        }
+    private void Button_LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_LogoutActionPerformed
+//        try {
+//            new view_form_login().setVisible(true);
+//            dispose();
+//
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(rootPane, "Tidak ada koneksi");
+//        }
     }//GEN-LAST:event_Button_LogoutActionPerformed
 
     private void Button_SearchBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_SearchBukuActionPerformed

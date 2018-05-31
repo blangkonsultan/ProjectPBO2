@@ -19,7 +19,7 @@ public abstract class basemodel {
         this.kon = new koneksi("postgres", "2796", "Perpustakaan");
     }
 
-    public boolean simpan(String query) throws SQLException {
+    public boolean save(String query) throws SQLException {
         try {
             kon.execute(query);
 
@@ -28,7 +28,6 @@ public abstract class basemodel {
             return false;
         }
     }
-
     protected boolean update(String query) throws SQLException {
         try {
             kon.execute(query);
@@ -38,7 +37,6 @@ public abstract class basemodel {
 
         }
     }
-
     public boolean delete(String query) throws SQLException {
         try {
             kon.execute(query);
@@ -47,8 +45,9 @@ public abstract class basemodel {
             return false;
         }
     }
+    protected abstract boolean simpan(String query) throws SQLException;
 
-    protected abstract void simpan(int NIM, int idBuku, String TanggalPinjam, String TanggalKembali, String Status) throws SQLException;
+    protected abstract boolean perbarui(String query) throws SQLException;
 
-    protected abstract void edit(int NIM, int idBuku, String TanggalPinjam, String TanggalKembali, String Status) throws SQLException;
+    protected abstract boolean hapus(String query) throws SQLException;
 }

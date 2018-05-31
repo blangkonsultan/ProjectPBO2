@@ -5,6 +5,13 @@
  */
 package view;
 
+import com.toedter.calendar.JYearChooser;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Bagas
@@ -34,7 +41,7 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         TextField_Penerbit = new javax.swing.JTextField();
-        TextField_IdBuku = new javax.swing.JTextField();
+        TextField_KodeBuku = new javax.swing.JTextField();
         TextField_JudulBuku = new javax.swing.JTextField();
         TextField_Pengarang = new javax.swing.JTextField();
         Button_Perbarui = new javax.swing.JButton();
@@ -50,6 +57,7 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         Table_DataBuku = new javax.swing.JTable();
+        Button_pilih = new javax.swing.JButton();
         Background = new javax.swing.JLabel();
 
         setResizable(false);
@@ -64,7 +72,7 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Id Buku");
+        jLabel2.setText("Kode Buku");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -86,12 +94,17 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
         });
         jPanel1.add(TextField_Penerbit, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 160, -1));
 
-        TextField_IdBuku.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                TextField_IdBukuKeyTyped(evt);
+        TextField_KodeBuku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextField_KodeBukuActionPerformed(evt);
             }
         });
-        jPanel1.add(TextField_IdBuku, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 160, -1));
+        TextField_KodeBuku.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TextField_KodeBukuKeyTyped(evt);
+            }
+        });
+        jPanel1.add(TextField_KodeBuku, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 160, -1));
 
         TextField_JudulBuku.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -111,6 +124,11 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
         jPanel1.add(Button_Perbarui, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
 
         Button_Simpan.setText("Simpan");
+        Button_Simpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_SimpanActionPerformed(evt);
+            }
+        });
         jPanel1.add(Button_Simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 80, -1));
 
         Button_Hapus.setText("Hapus");
@@ -124,7 +142,6 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
         jLabel7.setText("Kategori");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
-        ComboBox_KategoriBuku.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Matematika", "B.Inggris", "B.Indonesia", "Kamus" }));
         jPanel1.add(ComboBox_KategoriBuku, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 160, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -183,7 +200,7 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID BUKU", "JUDUL BUKU", "PENGARANG", "PENERBIT", "TAHUN TERBIT", "KATEGORI", "STOK"
+                "KODE BUKU", "JUDUL BUKU", "PENGARANG", "PENERBIT", "TAHUN TERBIT", "KATEGORI", "STOK"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -196,7 +213,10 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
         });
         jScrollPane2.setViewportView(Table_DataBuku);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 320));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 280));
+
+        Button_pilih.setText("Pilih");
+        jPanel2.add(Button_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 500, 320));
 
@@ -206,17 +226,106 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Closes the dialog
-     */
+    public void setTabel(DefaultTableModel tabel) {
+        this.Table_DataBuku.setModel(tabel);
+    }
+
+    public int getSelectedRow() {
+        return Table_DataBuku.getSelectedRow();
+    }
+
+    public String getValueAt(int baris, int kolom) {
+        return (String) this.Table_DataBuku.getValueAt(baris, kolom);
+    }
+
+    public void simpanKelolaBukuListener(ActionListener l) {
+        this.Button_Simpan.addActionListener(l);
+    }
+
+    public void segarkanKelolaBukuListener(ActionListener l) {
+        this.Button_Segarkan.addActionListener(l);
+    }
+
+    public void hapusKelolaBukuListener(ActionListener l) {
+        this.Button_Hapus.addActionListener(l);
+    }
+
+    public void perbaruiKelolaBukuListener(ActionListener l) {
+        this.Button_Perbarui.addActionListener(l);
+    }
+
+    public void pilihKelolaBukuListener(ActionListener l) {
+        this.Button_pilih.addActionListener(l);
+    }
+
+    public String getTextField_Penerbit() {
+        return TextField_Penerbit.getText();
+    }
+
+    public String getTextField_KodeBuku() {
+        return TextField_KodeBuku.getText();
+    }
+
+    public String getTextField_JudulBuku() {
+        return TextField_JudulBuku.getText();
+    }
+
+    public String getTextField_Pengarang() {
+        return TextField_Pengarang.getText();
+    }
+
+    public String getTextField_Stok() {
+        return TextField_Stok.getText();
+    }
+
+    public String getYearChooser_TahunTerbitBuku() {
+        int year = YearChooser_TahunTerbitBuku.getValue();
+        return String.valueOf(year);
+    }
+
+    public void setTextField_JudulBuku(String value) {
+        this.TextField_JudulBuku.setText(value);
+    }
+
+    public void setTextField_KodeBuku(String value) {
+        this.TextField_KodeBuku.setText(value);
+    }
+
+    public void setTextField_Penerbit(String value) {
+        this.TextField_Penerbit.setText(value);
+    }
+
+    public void setTextField_Pengarang(String value) {
+        this.TextField_Pengarang.setText(value);
+    }
+
+    public void setTextField_Stok(String value) {
+        this.TextField_Stok.setText(value);
+    }
+
+    public void setYearChooser_TahunTerbitBuku(String value) {
+        this.YearChooser_TahunTerbitBuku.setYear(Integer.parseInt(value));
+    }
+
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
         setVisible(false);
         dispose();
     }//GEN-LAST:event_closeDialog
 
-    private void TextField_IdBukuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_IdBukuKeyTyped
+    public void setComboBox_KategoriBuku(String[] ComboBox_KategoriBuku) {
+        for (String a : ComboBox_KategoriBuku) {
+            this.ComboBox_KategoriBuku.addItem(a);
+        }
+    }
 
-    }//GEN-LAST:event_TextField_IdBukuKeyTyped
+    public String getComboBox_KategoriBuku() {
+        return ComboBox_KategoriBuku.getSelectedItem().toString();
+    }
+
+
+    private void TextField_KodeBukuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_KodeBukuKeyTyped
+
+    }//GEN-LAST:event_TextField_KodeBukuKeyTyped
 
     private void TextField_JudulBukuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_JudulBukuKeyTyped
 
@@ -240,6 +349,14 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
         }
     }//GEN-LAST:event_TextField_StokKeyTyped
 
+    private void TextField_KodeBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_KodeBukuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextField_KodeBukuActionPerformed
+
+    private void Button_SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_SimpanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Button_SimpanActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -257,17 +374,17 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
 //        });
 //    }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
     private javax.swing.JButton Button_Hapus;
     private javax.swing.JButton Button_Perbarui;
     private javax.swing.JButton Button_Segarkan;
     private javax.swing.JButton Button_Simpan;
+    private javax.swing.JButton Button_pilih;
     private javax.swing.JComboBox<String> ComboBox_KategoriBuku;
     private javax.swing.JTable Table_DataBuku;
-    private javax.swing.JTextField TextField_IdBuku;
     private javax.swing.JTextField TextField_JudulBuku;
+    private javax.swing.JTextField TextField_KodeBuku;
     private javax.swing.JTextField TextField_Penerbit;
     private javax.swing.JTextField TextField_Pengarang;
     private javax.swing.JTextField TextField_Stok;
