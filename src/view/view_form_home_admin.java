@@ -376,8 +376,12 @@ public class view_form_home_admin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setTabel(DefaultTableModel tabel) {
+    public void setTabelBuku(DefaultTableModel tabel) {
         this.Table_DataBuku.setModel(tabel);
+    }
+    
+    public void setTabelMahasiswa(DefaultTableModel tabel) {
+        this.Table_DataMahasiswa.setModel(tabel);
     }
 
     public int getSelectedRow() {
@@ -452,15 +456,15 @@ public class view_form_home_admin extends javax.swing.JFrame {
     }//GEN-LAST:event_TextField_cariMahasiswaActionPerformed
 
     private void Button_EditBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EditBukuActionPerformed
-        //new view_dialog_kelolaBuku(this, rootPaneCheckingEnabled).setVisible(true);
+     
     }//GEN-LAST:event_Button_EditBukuActionPerformed
 
     private void Button_EditPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EditPeminjamanActionPerformed
-        new view_dialog_kelolaPeminjaman(this, rootPaneCheckingEnabled).setVisible(true);
+     
     }//GEN-LAST:event_Button_EditPeminjamanActionPerformed
 
     private void Button_EditMahasiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EditMahasiswaActionPerformed
-        new view_dialog_kelolaMahasiswa(this, rootPaneCheckingEnabled).setVisible(true);
+    
     }//GEN-LAST:event_Button_EditMahasiswaActionPerformed
 
     private void Button_CetakMahasiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CetakMahasiswaActionPerformed
@@ -480,13 +484,7 @@ public class view_form_home_admin extends javax.swing.JFrame {
 
 
     private void Button_LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_LogoutActionPerformed
-//        try {
-//            new view_form_login().setVisible(true);
-//            dispose();
-//
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(rootPane, "Tidak ada koneksi");
-//        }
+
     }//GEN-LAST:event_Button_LogoutActionPerformed
 
     private void Button_SearchBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_SearchBukuActionPerformed

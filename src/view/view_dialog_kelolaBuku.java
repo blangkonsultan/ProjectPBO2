@@ -225,7 +225,15 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void buttonEdit(boolean status) {
+    this.Button_Perbarui.setEnabled(status);
+    }
+    
+    public void buttonSimpan(boolean status) {
+    this.Button_Simpan.setEnabled(status);
+    }
+    
     public void setTabel(DefaultTableModel tabel) {
         this.Table_DataBuku.setModel(tabel);
     }
@@ -357,22 +365,6 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_Button_SimpanActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                view_dialog_kelolaBuku dialog = new view_dialog_kelolaBuku(new java.awt.Frame(), true);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;

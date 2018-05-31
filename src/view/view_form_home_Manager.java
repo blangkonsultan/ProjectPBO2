@@ -6,6 +6,7 @@
 package view;
 
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -320,6 +321,14 @@ public class view_form_home_Manager extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void setTabelBuku(DefaultTableModel tabel) {
+        this.Table_DataBuku.setModel(tabel);
+    }
+
+    public void setTabelMahasiswa(DefaultTableModel tabel) {
+        this.Table_DataMahasiswa.setModel(tabel);
+    }
 
     public void CetakBukuListener(ActionListener l) {
         this.Button_CetakBuku.addActionListener(l);

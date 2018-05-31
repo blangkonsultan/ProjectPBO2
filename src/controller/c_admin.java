@@ -17,6 +17,7 @@ import view.view_form_home_admin;
 import view.view_form_login;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import view.view_dialog_kelolaMahasiswa;
 
 /**
  *
@@ -28,11 +29,13 @@ public class c_admin {
     m_admin modelAdmin;
     view_form_home_admin viewAdmin;
     view_dialog_kelolaBuku dialogBuku;
+    view_dialog_kelolaMahasiswa dialogMahasiswa;
 
     public c_admin(m_admin modelAdmin, view_form_home_admin viewAdmin) throws SQLException {
         this.modelAdmin = modelAdmin;
         this.viewAdmin = viewAdmin;
-        viewAdmin.setTabel(modelAdmin.getTableModelBuku());
+        viewAdmin.setTabelBuku(modelAdmin.getTableModelBuku());
+        viewAdmin.setTabelMahasiswa(modelAdmin.getTableModelMahasiswa());
         viewAdmin.CetakBukuListener(new CetakBukuListener());
         viewAdmin.CetakMahasiswaListener(new CetakMahasiswaListener());
         viewAdmin.CetakPeminjamanListener(new CetakPeminjamanListener());
@@ -54,6 +57,172 @@ public class c_admin {
         this.dialogBuku.hapusKelolaBukuListener(new hapusKelolaBukuListener());
         this.dialogBuku.pilihKelolaBukuListener(new pilihKelolaBukuListener());
         dialogBuku.setTabel(modelAdmin.getTableModelBuku());
+        dialogBuku.setComboBox_KategoriBuku(modelAdmin.comboKategori());
+        dialogBuku.buttonEdit(false);
+        dialogBuku.buttonSimpan(true);
+
+        dialogMahasiswa = new view_dialog_kelolaMahasiswa(viewAdmin, true);
+        this.dialogMahasiswa.simpanKelolaMahasiswaListener(new simpanKelolaMahasiswaListener());
+        this.dialogMahasiswa.segarkanKelolaMahasiswaListener(new segarkanKelolaMahasiswaListener());
+        this.dialogMahasiswa.perbaruiKelolaMahasiswaListener(new perbaruiKelolaMahasiswaListener());
+        this.dialogMahasiswa.hapusKelolaMahasiswaListener(new hapusKelolaMahasiswaListener());
+        this.dialogMahasiswa.pilihKelolaMahasiswaListener(new pilihKelolaMahasiswaListener());
+        dialogMahasiswa.setTabel(modelAdmin.getTableModelMahasiswa());
+        dialogMahasiswa.setComboBox_Fakultas(modelAdmin.comboFakultas());
+        dialogMahasiswa.buttonEdit(false);
+        dialogMahasiswa.buttonSimpan(true);
+    }
+
+    public void resetBuku() {
+        dialogBuku.setTextField_JudulBuku("");
+        dialogBuku.setTextField_KodeBuku("");
+        dialogBuku.setTextField_Penerbit("");
+        dialogBuku.setTextField_Stok("");
+        dialogBuku.setTextField_Pengarang("");
+
+    }
+
+    public void resetMahasiswa() {
+        dialogMahasiswa.setTextField_NIM("");
+        dialogMahasiswa.setTextField_NamaLengkap("");
+        dialogMahasiswa.setTextField_TempatLahir("");
+
+    }
+
+    private class segarkanKelolaMahasiswaListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                viewAdmin.setTabelMahasiswa(modelAdmin.getTableModelMahasiswa());
+            } catch (SQLException ex) {
+                Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private class perbaruiKelolaMahasiswaListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                int fakultas = 0;
+                if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Ilmu Komputer")) {
+                    fakultas = 1;
+                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Teknik")) {
+                    fakultas = 2;
+                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Ilmu Sosial dan Politik")) {
+                    fakultas = 3;
+                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Kedokteran")) {
+                    fakultas = 4;
+                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Teknologi Pertanian")) {
+                    fakultas = 5;
+                } else {
+                    fakultas = 6;
+                }
+
+                String fakultass = Integer.toString(fakultas);
+                System.out.println(fakultass);
+                int baris = dialogMahasiswa.getSelectedRow();
+                String nim = dialogMahasiswa.getTextField_NIM();
+                String nama = dialogMahasiswa.getTextField_NamaLengkap();
+                String tempatlahir = dialogMahasiswa.getTextField_TempatLahir();
+                String tanggal = dialogMahasiswa.getTanggalLahir();
+                String id = dialogMahasiswa.getValueAt(baris, 0);
+                modelAdmin.perbarui("public.mahasiswa\n"
+                        + "	SET nama='" + nama + "', \"tempatLahir\"='" + tempatlahir + "', \"tanggalLahir\"='" + tanggal + "', nim='" + nim + "', idfakultas=" + fakultass + "\n"
+                        + "	WHERE idmahasiswa =" + id + "");
+                dialogMahasiswa.setTabel(modelAdmin.getTableModelMahasiswa());
+                resetMahasiswa();
+                dialogMahasiswa.buttonEdit(false);
+                dialogMahasiswa.buttonSimpan(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private class hapusKelolaMahasiswaListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                int baris = dialogMahasiswa.getSelectedRow();
+                String nim = dialogMahasiswa.getValueAt(baris, 1);
+                System.out.println(nim);
+                modelAdmin.hapus("mahasiswa WHERE nim ='" + nim + "'");
+                dialogMahasiswa.setTabel(modelAdmin.getTableModelMahasiswa());
+            } catch (SQLException ex) {
+                Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private class pilihKelolaMahasiswaListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int baris = dialogMahasiswa.getSelectedRow();
+            if (baris != -1) {
+
+                try {
+
+                    String nim = dialogMahasiswa.getValueAt(baris, 1);
+                    String nama = dialogMahasiswa.getValueAt(baris, 2);
+//                    String fakultas = dialogMahasiswa.getValueAt(baris, 3);
+                    String tempatlahir = dialogMahasiswa.getValueAt(baris, 4);
+                    String tanggallahir = dialogMahasiswa.getValueAt(baris, 5);
+
+                    dialogMahasiswa.setComboBox_Fakultas(modelAdmin.comboKategori());
+                    dialogMahasiswa.setTextField_NIM(nim);
+                    dialogMahasiswa.setTextField_NamaLengkap(nama);
+                    dialogMahasiswa.setTextField_TempatLahir(tempatlahir);
+                    dialogMahasiswa.setTanggalLahir(tanggallahir);
+                    dialogMahasiswa.buttonEdit(true);
+                    dialogMahasiswa.buttonSimpan(false);
+                } catch (SQLException ex) {
+                    Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }
+    }
+
+    private class simpanKelolaMahasiswaListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("bisakok");
+            try {
+                int fakultas = 0;
+                if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Ilmu Komputer")) {
+                    fakultas = 1;
+                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Teknik")) {
+                    fakultas = 2;
+                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Ilmu Sosial dan Politik")) {
+                    fakultas = 3;
+                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Kedokteran")) {
+                    fakultas = 4;
+                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Teknologi Pertanian")) {
+                    fakultas = 5;
+                } else {
+                    fakultas = 6;
+                }
+
+                String fakultass = Integer.toString(fakultas);
+                System.out.println(fakultass);
+                modelAdmin.simpan("public.mahasiswa(\n"
+                        + "	idmahasiswa, nama, \"tempatLahir\", \"tanggalLahir\", nim, idfakultas)\n"
+                        + "	VALUES (default, '" + dialogMahasiswa.getTextField_NamaLengkap() + "', '"
+                        + dialogMahasiswa.getTextField_TempatLahir() + "', '" + dialogMahasiswa.getTanggalLahir()
+                        + "', '" + dialogMahasiswa.getTextField_NIM() + "'," + fakultass + " )");
+                dialogMahasiswa.setTabel(modelAdmin.getTableModelMahasiswa());
+                resetBuku();
+                JOptionPane.showMessageDialog(frame, "data berhasil disimpan");
+            } catch (SQLException ex) {
+                Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     private class pilihKelolaBukuListener implements ActionListener {
@@ -62,7 +231,6 @@ public class c_admin {
         public void actionPerformed(ActionEvent e) {
             int baris = dialogBuku.getSelectedRow();
             if (baris != -1) {
-
 
                 try {
 
@@ -80,6 +248,8 @@ public class c_admin {
                     dialogBuku.setTextField_Penerbit(penerbit);
                     dialogBuku.setTextField_Stok(stok);
                     dialogBuku.setYearChooser_TahunTerbitBuku(tahunTerbit);
+                    dialogBuku.buttonEdit(true);
+                    dialogBuku.buttonSimpan(false);
                 } catch (SQLException ex) {
                     Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -96,7 +266,7 @@ public class c_admin {
                 int baris = dialogBuku.getSelectedRow();
                 String kode = dialogBuku.getValueAt(baris, 1);
                 System.out.println(kode);
-                modelAdmin.hapus(kode);
+                modelAdmin.hapus("buku WHERE kode ='" + kode + "'");
                 dialogBuku.setTabel(modelAdmin.getTableModelBuku());
             } catch (SQLException ex) {
                 Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
@@ -130,11 +300,11 @@ public class c_admin {
                 String stok = dialogBuku.getTextField_Stok();
                 String tahunTerbit = dialogBuku.getYearChooser_TahunTerbitBuku();
                 String id = dialogBuku.getValueAt(baris, 0);
-                modelAdmin.perbarui("kode='" + kode + "', judul='" + judul + "', pengarang='" + pengarang + "', penerbit='" + penerbit + "', stok='" + stok + "', rilis='" + tahunTerbit + "', idkategori=" + kategorix + "	WHERE idbuku = "+id+";");
+                modelAdmin.perbarui("public.buku SET kode='" + kode + "', judul='" + judul + "', pengarang='" + pengarang + "', penerbit='" + penerbit + "', stok='" + stok + "', rilis='" + tahunTerbit + "', idkategori=" + kategorix + "	WHERE idbuku = " + id + ";");
                 dialogBuku.setTabel(modelAdmin.getTableModelBuku());
-//                clear();
-//                theView.btnEdit(false);
-//                theView.btnTambah(true);
+                resetBuku();
+                dialogBuku.buttonEdit(false);
+                dialogBuku.buttonSimpan(true);
             } catch (SQLException ex) {
                 Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -146,7 +316,7 @@ public class c_admin {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                viewAdmin.setTabel(modelAdmin.getTableModelBuku());
+                viewAdmin.setTabelBuku(modelAdmin.getTableModelBuku());
             } catch (SQLException ex) {
                 Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -174,12 +344,13 @@ public class c_admin {
 
                 String kategorix = Integer.toString(kategori);
                 System.out.println(kategorix);
-                modelAdmin.simpan("default, '" + dialogBuku.getTextField_KodeBuku()
-                        + "', '" + dialogBuku.getTextField_JudulBuku() + "', '"
-                        + dialogBuku.getTextField_Pengarang() + "', '"
-                        + dialogBuku.getTextField_Penerbit() + "', " + dialogBuku.getTextField_Stok()
-                        + ", '" + dialogBuku.getYearChooser_TahunTerbitBuku() + "', " + kategorix + "");
+                modelAdmin.simpan("public.buku(idbuku, kode, judul, pengarang, penerbit, stok, rilis, idkategori)"
+                        + " VALUES (default, ' " + dialogBuku.getTextField_KodeBuku() + "', '"
+                        + dialogBuku.getTextField_JudulBuku() + "', '" + dialogBuku.getTextField_Pengarang() + "', '"
+                        + dialogBuku.getTextField_Penerbit() + "', " + dialogBuku.getTextField_Stok() + ", '"
+                        + dialogBuku.getYearChooser_TahunTerbitBuku() + "', " + kategorix + ")");
                 dialogBuku.setTabel(modelAdmin.getTableModelBuku());
+                resetBuku();
                 JOptionPane.showMessageDialog(frame, "data berhasil disimpan");
             } catch (SQLException ex) {
                 Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
@@ -261,7 +432,7 @@ public class c_admin {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                viewAdmin.setTabel(modelAdmin.getTableModelBuku());
+                viewAdmin.setTabelBuku(modelAdmin.getTableModelBuku());
             } catch (SQLException ex) {
                 Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -270,12 +441,13 @@ public class c_admin {
 
     private class SegarkanMahasiswaListener implements ActionListener {
 
-        public SegarkanMahasiswaListener() {
-        }
-
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            try {
+                viewAdmin.setTabelMahasiswa(modelAdmin.getTableModelMahasiswa());
+            } catch (SQLException ex) {
+                Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -297,8 +469,8 @@ public class c_admin {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            //                new c_admin(modelAdmin, dialogBuku);
             dialogBuku.setVisible(true);
+
         }
     }
 
@@ -309,7 +481,7 @@ public class c_admin {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            dialogMahasiswa.setVisible(true);
         }
     }
 

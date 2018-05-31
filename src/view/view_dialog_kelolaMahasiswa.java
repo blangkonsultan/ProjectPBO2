@@ -5,15 +5,22 @@
  */
 package view;
 
+import com.toedter.calendar.JDateChooser;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Bagas
  */
 public class view_dialog_kelolaMahasiswa extends java.awt.Dialog {
 
-    /**
-     * Creates new form dialog_kelolaBuku
-     */
+    String tanggalLahir;
+
     public view_dialog_kelolaMahasiswa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -113,8 +120,13 @@ public class view_dialog_kelolaMahasiswa extends java.awt.Dialog {
         jLabel7.setText("Tanggal Lahir");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
-        ComboBox_Fakultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fakultas Ilmu Komputer", "Fakultas Teknik", "Fakultas Kedokteran", " " }));
         jPanel1.add(ComboBox_Fakultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 160, -1));
+
+        DateChooser_TanggalLahir.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                DateChooser_TanggalLahirPropertyChange(evt);
+            }
+        });
         jPanel1.add(DateChooser_TanggalLahir, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 160, -1));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 280, 320));
@@ -184,9 +196,85 @@ public class view_dialog_kelolaMahasiswa extends java.awt.Dialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Closes the dialog
-     */
+    public void buttonEdit(boolean status) {
+        this.Button_Perbarui.setEnabled(status);
+    }
+
+    public void buttonSimpan(boolean status) {
+        this.Button_Simpan.setEnabled(status);
+    }
+
+    public void simpanKelolaMahasiswaListener(ActionListener l) {
+        this.Button_Simpan.addActionListener(l);
+    }
+
+    public void segarkanKelolaMahasiswaListener(ActionListener l) {
+        this.Button_Segarkan.addActionListener(l);
+    }
+
+    public void hapusKelolaMahasiswaListener(ActionListener l) {
+        this.Button_Hapus.addActionListener(l);
+    }
+
+    public void perbaruiKelolaMahasiswaListener(ActionListener l) {
+        this.Button_Perbarui.addActionListener(l);
+    }
+
+    public void pilihKelolaMahasiswaListener(ActionListener l) {
+        this.Button_pilih.addActionListener(l);
+    }
+
+    public JDateChooser getDateChooser_TanggalLahir() {
+        return DateChooser_TanggalLahir;
+    }
+
+    public void setTabel(DefaultTableModel tabel) {
+        this.Table_DataMahasiswa.setModel(tabel);
+    }
+
+    public int getSelectedRow() {
+        return Table_DataMahasiswa.getSelectedRow();
+    }
+
+    public String getValueAt(int baris, int kolom) {
+        return (String) this.Table_DataMahasiswa.getValueAt(baris, kolom);
+    }
+
+    public String getTextField_NIM() {
+        return TextField_NIM.getText();
+    }
+
+    public String getTextField_NamaLengkap() {
+        return TextField_NamaLengkap.getText();
+    }
+
+    public String getTextField_TempatLahir() {
+        return TextField_TempatLahir.getText();
+    }
+
+    public void setComboBox_Fakultas(String[] ComboBox_Fakultas) {
+        for (String a : ComboBox_Fakultas) {
+            this.ComboBox_Fakultas.addItem(a);
+        }
+    }
+
+    public String getComboBox_Fakultas() {
+        return ComboBox_Fakultas.getSelectedItem().toString();
+    }
+
+    public void setTextField_NIM(String TextField_NIM) {
+        this.TextField_NIM.setText(TextField_NIM);
+    }
+
+    public void setTextField_NamaLengkap(String TextField_NamaLengkap) {
+        this.TextField_NamaLengkap.setText(TextField_NamaLengkap);
+    }
+
+    public void setTextField_TempatLahir(String TextField_TempatLahir) {
+        this.TextField_TempatLahir.setText(TextField_TempatLahir);
+    }
+
+
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
         setVisible(false);
         dispose();
@@ -210,23 +298,22 @@ public class view_dialog_kelolaMahasiswa extends java.awt.Dialog {
         }
     }//GEN-LAST:event_TextField_TempatLahirKeyTyped
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                view_dialog_kelolaMahasiswa dialog = new view_dialog_kelolaMahasiswa(new java.awt.Frame(), true);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
-//            }
-//        });
-//    }
+    private void DateChooser_TanggalLahirPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_DateChooser_TanggalLahirPropertyChange
+        if (DateChooser_TanggalLahir.getDate() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            tanggalLahir = sdf.format(DateChooser_TanggalLahir.getDate());
+            System.out.println(tanggalLahir);
+        }  
+    }//GEN-LAST:event_DateChooser_TanggalLahirPropertyChange
 
+
+    public String getTanggalLahir() {
+        return tanggalLahir;
+    }
+
+    public void setTanggalLahir(String tanggalLahir) {
+        this.DateChooser_TanggalLahir.setDateFormatString(tanggalLahir);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
@@ -250,4 +337,5 @@ public class view_dialog_kelolaMahasiswa extends java.awt.Dialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
+
 }

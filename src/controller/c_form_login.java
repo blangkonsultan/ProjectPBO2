@@ -52,7 +52,7 @@ public class c_form_login {
                         view_form_home_Manager manager = new view_form_home_Manager();
                         viewLogin.dispose();
                         manager.setVisible(true);
-                        m_manager model = new m_manager();
+                        m_manager model = new m_manager(kon);
                         new c_manager(model, manager);
                     } else if (level == 2) {
                         JOptionPane.showMessageDialog(viewLogin, "selamat Datang " + username + " !");

@@ -24,10 +24,11 @@ public class c_manager {
     m_manager modelManager;
     view_form_home_Manager viewManager;
 
-    public c_manager(m_manager modelManager, view_form_home_Manager viewManager) {
+    public c_manager(m_manager modelManager, view_form_home_Manager viewManager) throws SQLException {
         this.modelManager = modelManager;
         this.viewManager = viewManager;
-
+        viewManager.setTabelBuku(modelManager.getTableModelBuku());
+        viewManager.setTabelMahasiswa(modelManager.getTableModelMahasiswa());
         viewManager.CetakBukuListener(new CetakBukuListener());
         viewManager.CetakMahasiswaListener(new CetakMahasiswaListener());
         viewManager.CetakPeminjamanListener(new CetakPeminjamanListener());
@@ -35,15 +36,12 @@ public class c_manager {
         viewManager.SearchMahasiswaListener(new SearchMahasiswaListener());
         viewManager.SearchPeminjamanListener(new SearchPeminjamanListener());
         viewManager.SegarkanBukuListener(new SegarkanBukuListener());
-        viewManager.SegarkanMahasiswaListener(new SegarkanMahasiswaListener());
         viewManager.SegarkanPeminjamanListener(new SegarkanPeminjamanListener());
+        viewManager.SegarkanMahasiswaListener(new SegarkanMahasiswaListener());
         viewManager.logoutListener(new logoutListener());
     }
 
     private class logoutListener implements ActionListener {
-
-        public logoutListener() {
-        }
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -127,23 +125,25 @@ public class c_manager {
 
     private class SegarkanBukuListener implements ActionListener {
 
-        public SegarkanBukuListener() {
-        }
-
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            try {
+                viewManager.setTabelBuku(modelManager.getTableModelBuku());
+            } catch (SQLException ex) {
+                Logger.getLogger(c_manager.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
     private class SegarkanMahasiswaListener implements ActionListener {
 
-        public SegarkanMahasiswaListener() {
-        }
-
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            try {
+                viewManager.setTabelMahasiswa(modelManager.getTableModelMahasiswa());
+            } catch (SQLException ex) {
+                Logger.getLogger(c_manager.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
