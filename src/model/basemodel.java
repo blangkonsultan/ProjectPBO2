@@ -28,7 +28,8 @@ public abstract class basemodel {
             return false;
         }
     }
-    protected boolean update(String query) throws SQLException {
+
+    public boolean update(String query) throws SQLException {
         try {
             kon.execute(query);
             return true;
@@ -37,6 +38,8 @@ public abstract class basemodel {
 
         }
     }
+
+
     public boolean delete(String query) throws SQLException {
         try {
             kon.execute(query);
@@ -45,9 +48,11 @@ public abstract class basemodel {
             return false;
         }
     }
+
     protected abstract boolean simpan(String query) throws SQLException;
 
     protected abstract boolean perbarui(String query) throws SQLException;
 
     protected abstract boolean hapus(String query) throws SQLException;
+    
 }

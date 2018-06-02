@@ -20,13 +20,14 @@ import view.view_form_login;
  * @author Bagas
  */
 public class c_manager {
-
-    m_manager modelManager;
-    view_form_home_Manager viewManager;
+    private c_form_login login;
+    private m_manager modelManager;
+    private view_form_home_Manager viewManager;
 
     public c_manager(m_manager modelManager, view_form_home_Manager viewManager) throws SQLException {
         this.modelManager = modelManager;
         this.viewManager = viewManager;
+        viewManager.setSessionManager(login.getUserLogin());
         viewManager.setTabelBuku(modelManager.getTableModelBuku());
         viewManager.setTabelMahasiswa(modelManager.getTableModelMahasiswa());
         viewManager.CetakBukuListener(new CetakBukuListener());

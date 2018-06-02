@@ -15,7 +15,7 @@ import model.m_login;
 import view.view_dialog_kelolaBuku;
 import view.view_form_home_admin;
 import view.view_form_login;
-import javax.swing.JFrame;
+
 import javax.swing.JOptionPane;
 import view.view_dialog_kelolaMahasiswa;
 
@@ -25,8 +25,8 @@ import view.view_dialog_kelolaMahasiswa;
  */
 public class c_admin {
 
-    JFrame frame;
     m_admin modelAdmin;
+    c_form_login login;
     view_form_home_admin viewAdmin;
     view_dialog_kelolaBuku dialogBuku;
     view_dialog_kelolaMahasiswa dialogMahasiswa;
@@ -34,6 +34,7 @@ public class c_admin {
     public c_admin(m_admin modelAdmin, view_form_home_admin viewAdmin) throws SQLException {
         this.modelAdmin = modelAdmin;
         this.viewAdmin = viewAdmin;
+        viewAdmin.setSessionAdmin(login.getUserLogin());
         viewAdmin.setTabelBuku(modelAdmin.getTableModelBuku());
         viewAdmin.setTabelMahasiswa(modelAdmin.getTableModelMahasiswa());
         viewAdmin.CetakBukuListener(new CetakBukuListener());
@@ -106,36 +107,41 @@ public class c_admin {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                int fakultas = 0;
-                if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Ilmu Komputer")) {
-                    fakultas = 1;
-                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Teknik")) {
-                    fakultas = 2;
-                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Ilmu Sosial dan Politik")) {
-                    fakultas = 3;
-                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Kedokteran")) {
-                    fakultas = 4;
-                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Teknologi Pertanian")) {
-                    fakultas = 5;
+                if (dialogMahasiswa.getTextField_NamaLengkap().equalsIgnoreCase("")
+                        || dialogMahasiswa.getTextField_TempatLahir().equalsIgnoreCase("")
+                        || dialogMahasiswa.getTanggalLahir().equalsIgnoreCase("")
+                        || dialogMahasiswa.getTextField_NIM().equalsIgnoreCase("")) {
+                    JOptionPane.showMessageDialog(dialogMahasiswa, "Data Tidak Boleh Kosong!!!");
                 } else {
-                    fakultas = 6;
-                }
+                    int fakultas = 0;
+                    if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Ilmu Komputer")) {
+                        fakultas = 1;
+                    } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Teknik")) {
+                        fakultas = 2;
+                    } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Ilmu Sosial dan Politik")) {
+                        fakultas = 3;
+                    } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Kedokteran")) {
+                        fakultas = 4;
+                    } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Teknologi Pertanian")) {
+                        fakultas = 5;
+                    } else {
+                        fakultas = 6;
+                    }
 
-                String fakultass = Integer.toString(fakultas);
-                System.out.println(fakultass);
-                int baris = dialogMahasiswa.getSelectedRow();
-                String nim = dialogMahasiswa.getTextField_NIM();
-                String nama = dialogMahasiswa.getTextField_NamaLengkap();
-                String tempatlahir = dialogMahasiswa.getTextField_TempatLahir();
-                String tanggal = dialogMahasiswa.getTanggalLahir();
-                String id = dialogMahasiswa.getValueAt(baris, 0);
-                modelAdmin.perbarui("public.mahasiswa\n"
-                        + "	SET nama='" + nama + "', \"tempatLahir\"='" + tempatlahir + "', \"tanggalLahir\"='" + tanggal + "', nim='" + nim + "', idfakultas=" + fakultass + "\n"
-                        + "	WHERE idmahasiswa =" + id + "");
-                dialogMahasiswa.setTabel(modelAdmin.getTableModelMahasiswa());
-                resetMahasiswa();
-                dialogMahasiswa.buttonEdit(false);
-                dialogMahasiswa.buttonSimpan(true);
+                    int baris = dialogMahasiswa.getSelectedRow();
+                    String nim = dialogMahasiswa.getTextField_NIM();
+                    String nama = dialogMahasiswa.getTextField_NamaLengkap();
+                    String tempatlahir = dialogMahasiswa.getTextField_TempatLahir();
+                    String tanggal = dialogMahasiswa.getTanggalLahir();
+                    String id = dialogMahasiswa.getValueAt(baris, 0);
+                    modelAdmin.perbarui("public.mahasiswa\n"
+                            + "	SET nama='" + nama + "', \"tempatLahir\"='" + tempatlahir
+                            + "', \"tanggalLahir\"='" + tanggal + "', nim='" + nim + "', idfakultas=" + fakultas + ", \"user\"= " + login.getIdLogin() + " WHERE idmahasiswa =" + id + "");
+                    dialogMahasiswa.setTabel(modelAdmin.getTableModelMahasiswa());
+                    resetMahasiswa();
+                    dialogMahasiswa.buttonEdit(false);
+                    dialogMahasiswa.buttonSimpan(true);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -169,7 +175,6 @@ public class c_admin {
 
                     String nim = dialogMahasiswa.getValueAt(baris, 1);
                     String nama = dialogMahasiswa.getValueAt(baris, 2);
-//                    String fakultas = dialogMahasiswa.getValueAt(baris, 3);
                     String tempatlahir = dialogMahasiswa.getValueAt(baris, 4);
                     String tanggallahir = dialogMahasiswa.getValueAt(baris, 5);
 
@@ -194,31 +199,36 @@ public class c_admin {
         public void actionPerformed(ActionEvent e) {
             System.out.println("bisakok");
             try {
-                int fakultas = 0;
-                if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Ilmu Komputer")) {
-                    fakultas = 1;
-                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Teknik")) {
-                    fakultas = 2;
-                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Ilmu Sosial dan Politik")) {
-                    fakultas = 3;
-                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Kedokteran")) {
-                    fakultas = 4;
-                } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Teknologi Pertanian")) {
-                    fakultas = 5;
+                if (dialogMahasiswa.getTextField_NamaLengkap().equalsIgnoreCase("")
+                        || dialogMahasiswa.getTextField_TempatLahir().equalsIgnoreCase("")
+                        || dialogMahasiswa.getTanggalLahir().equalsIgnoreCase("")
+                        || dialogMahasiswa.getTextField_NIM().equalsIgnoreCase("")) {
+                    JOptionPane.showMessageDialog(dialogMahasiswa, "Data Tidak Boleh Kosong!!!");
                 } else {
-                    fakultas = 6;
-                }
+                    int fakultas = 0;
+                    if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Ilmu Komputer")) {
+                        fakultas = 1;
+                    } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Teknik")) {
+                        fakultas = 2;
+                    } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Ilmu Sosial dan Politik")) {
+                        fakultas = 3;
+                    } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Kedokteran")) {
+                        fakultas = 4;
+                    } else if (dialogMahasiswa.getComboBox_Fakultas().equals("Fakultas Teknologi Pertanian")) {
+                        fakultas = 5;
+                    } else {
+                        fakultas = 6;
+                    }
 
-                String fakultass = Integer.toString(fakultas);
-                System.out.println(fakultass);
-                modelAdmin.simpan("public.mahasiswa(\n"
-                        + "	idmahasiswa, nama, \"tempatLahir\", \"tanggalLahir\", nim, idfakultas)\n"
-                        + "	VALUES (default, '" + dialogMahasiswa.getTextField_NamaLengkap() + "', '"
-                        + dialogMahasiswa.getTextField_TempatLahir() + "', '" + dialogMahasiswa.getTanggalLahir()
-                        + "', '" + dialogMahasiswa.getTextField_NIM() + "'," + fakultass + " )");
-                dialogMahasiswa.setTabel(modelAdmin.getTableModelMahasiswa());
-                resetBuku();
-                JOptionPane.showMessageDialog(frame, "data berhasil disimpan");
+                    modelAdmin.simpan("public.mahasiswa(\n"
+                            + "	idmahasiswa, nama, \"tempatLahir\", \"tanggalLahir\", nim, idfakultas, \"user\")\n"
+                            + "	VALUES (default, '" + dialogMahasiswa.getTextField_NamaLengkap() + "', '"
+                            + dialogMahasiswa.getTextField_TempatLahir() + "', '" + dialogMahasiswa.getTanggalLahir()
+                            + "', '" + dialogMahasiswa.getTextField_NIM() + "'," + fakultas + ", " + login.getIdLogin() + " )");
+                    dialogMahasiswa.setTabel(modelAdmin.getTableModelMahasiswa());
+                    resetMahasiswa();
+                    JOptionPane.showMessageDialog(dialogMahasiswa, "data berhasil disimpan");
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -279,32 +289,42 @@ public class c_admin {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                int kategori = 0;
-                if (dialogBuku.getComboBox_KategoriBuku().equals("Matematika")) {
-                    kategori = 1;
-                } else if (dialogBuku.getComboBox_KategoriBuku().equals("B.Inggris")) {
-                    kategori = 2;
-                } else if (dialogBuku.getComboBox_KategoriBuku().equals("B.Indonesia")) {
-                    kategori = 3;
+                if (dialogBuku.getTextField_KodeBuku().equalsIgnoreCase("")
+                        || dialogBuku.getTextField_JudulBuku().equalsIgnoreCase("")
+                        || dialogBuku.getTextField_Pengarang().equalsIgnoreCase("")
+                        || dialogBuku.getTextField_Penerbit().equalsIgnoreCase("")
+                        || dialogBuku.getTextField_Stok().equalsIgnoreCase("")
+                        || dialogBuku.getYearChooser_TahunTerbitBuku().equalsIgnoreCase("")) {
+                    JOptionPane.showMessageDialog(dialogBuku, "Data tidak boleh ada yang kosong!!!");
                 } else {
-                    kategori = 4;
-                }
+                    int kategori = 0;
+                    if (dialogBuku.getComboBox_KategoriBuku().equals("Matematika")) {
+                        kategori = 1;
+                    } else if (dialogBuku.getComboBox_KategoriBuku().equals("B.Inggris")) {
+                        kategori = 2;
+                    } else if (dialogBuku.getComboBox_KategoriBuku().equals("B.Indonesia")) {
+                        kategori = 3;
+                    } else {
+                        kategori = 4;
+                    }
 
-                String kategorix = Integer.toString(kategori);
-                System.out.println(kategorix);
-                int baris = dialogBuku.getSelectedRow();
-                String kode = dialogBuku.getTextField_KodeBuku();
-                String judul = dialogBuku.getTextField_JudulBuku();
-                String pengarang = dialogBuku.getTextField_Pengarang();
-                String penerbit = dialogBuku.getTextField_Penerbit();
-                String stok = dialogBuku.getTextField_Stok();
-                String tahunTerbit = dialogBuku.getYearChooser_TahunTerbitBuku();
-                String id = dialogBuku.getValueAt(baris, 0);
-                modelAdmin.perbarui("public.buku SET kode='" + kode + "', judul='" + judul + "', pengarang='" + pengarang + "', penerbit='" + penerbit + "', stok='" + stok + "', rilis='" + tahunTerbit + "', idkategori=" + kategorix + "	WHERE idbuku = " + id + ";");
-                dialogBuku.setTabel(modelAdmin.getTableModelBuku());
-                resetBuku();
-                dialogBuku.buttonEdit(false);
-                dialogBuku.buttonSimpan(true);
+                    int baris = dialogBuku.getSelectedRow();
+                    String kode = dialogBuku.getTextField_KodeBuku();
+                    String judul = dialogBuku.getTextField_JudulBuku();
+                    String pengarang = dialogBuku.getTextField_Pengarang();
+                    String penerbit = dialogBuku.getTextField_Penerbit();
+                    String stok = dialogBuku.getTextField_Stok();
+                    String tahunTerbit = dialogBuku.getYearChooser_TahunTerbitBuku();
+                    String id = dialogBuku.getValueAt(baris, 0);
+                    modelAdmin.perbarui("public.buku SET kode='" + kode + "', judul='" + judul
+                            + "', pengarang='" + pengarang + "', penerbit='" + penerbit
+                            + "', stok='" + stok + "', rilis='" + tahunTerbit
+                            + "', idkategori=" + kategori + ", \"user\"= " + login.getIdLogin() + " WHERE idbuku = " + id + ";");
+                    dialogBuku.setTabel(modelAdmin.getTableModelBuku());
+                    resetBuku();
+                    dialogBuku.buttonEdit(false);
+                    dialogBuku.buttonSimpan(true);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -331,27 +351,34 @@ public class c_admin {
             System.out.println(dialogBuku.getYearChooser_TahunTerbitBuku());
             System.out.println("bisakok");
             try {
-                int kategori = 0;
-                if (dialogBuku.getComboBox_KategoriBuku().equals("Matematika")) {
-                    kategori = 1;
-                } else if (dialogBuku.getComboBox_KategoriBuku().equals("B.Inggris")) {
-                    kategori = 2;
-                } else if (dialogBuku.getComboBox_KategoriBuku().equals("B.Indonesia")) {
-                    kategori = 3;
+                if (dialogBuku.getTextField_KodeBuku().equalsIgnoreCase("")
+                        || dialogBuku.getTextField_JudulBuku().equalsIgnoreCase("")
+                        || dialogBuku.getTextField_Pengarang().equalsIgnoreCase("")
+                        || dialogBuku.getTextField_Penerbit().equalsIgnoreCase("")
+                        || dialogBuku.getTextField_Stok().equalsIgnoreCase("")
+                        || dialogBuku.getYearChooser_TahunTerbitBuku().equalsIgnoreCase("")) {
+                    JOptionPane.showMessageDialog(dialogBuku, "Data tidak boleh ada yang kosong!!!");
                 } else {
-                    kategori = 4;
-                }
+                    int kategori = 0;
+                    if (dialogBuku.getComboBox_KategoriBuku().equals("Matematika")) {
+                        kategori = 1;
+                    } else if (dialogBuku.getComboBox_KategoriBuku().equals("B.Inggris")) {
+                        kategori = 2;
+                    } else if (dialogBuku.getComboBox_KategoriBuku().equals("B.Indonesia")) {
+                        kategori = 3;
+                    } else {
+                        kategori = 4;
+                    }
 
-                String kategorix = Integer.toString(kategori);
-                System.out.println(kategorix);
-                modelAdmin.simpan("public.buku(idbuku, kode, judul, pengarang, penerbit, stok, rilis, idkategori)"
-                        + " VALUES (default, ' " + dialogBuku.getTextField_KodeBuku() + "', '"
-                        + dialogBuku.getTextField_JudulBuku() + "', '" + dialogBuku.getTextField_Pengarang() + "', '"
-                        + dialogBuku.getTextField_Penerbit() + "', " + dialogBuku.getTextField_Stok() + ", '"
-                        + dialogBuku.getYearChooser_TahunTerbitBuku() + "', " + kategorix + ")");
-                dialogBuku.setTabel(modelAdmin.getTableModelBuku());
-                resetBuku();
-                JOptionPane.showMessageDialog(frame, "data berhasil disimpan");
+                    modelAdmin.simpan("public.buku(idbuku, kode, judul, pengarang, penerbit, stok, rilis, idkategori, \"user\")"
+                            + " VALUES (default, ' " + dialogBuku.getTextField_KodeBuku() + "', '"
+                            + dialogBuku.getTextField_JudulBuku() + "', '" + dialogBuku.getTextField_Pengarang() + "', '"
+                            + dialogBuku.getTextField_Penerbit() + "', " + dialogBuku.getTextField_Stok() + ", '"
+                            + dialogBuku.getYearChooser_TahunTerbitBuku() + "', " + kategori + ", " + login.getIdLogin() + ")");
+                    dialogBuku.setTabel(modelAdmin.getTableModelBuku());
+                    resetBuku();
+                    JOptionPane.showMessageDialog(dialogBuku, "data berhasil disimpan");
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -393,12 +420,14 @@ public class c_admin {
 
     private class SearchBukuListener implements ActionListener {
 
-        public SearchBukuListener() {
-        }
-
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+            try {
+                viewAdmin.setTabelBuku(modelAdmin.getTableModelBukuCari("'" + viewAdmin.getBuku() + "'"));
+            } catch (SQLException ex) {
+                Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -409,7 +438,11 @@ public class c_admin {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            try {
+                viewAdmin.setTabelMahasiswa(modelAdmin.getTableModelMahasiswaCari("'" + viewAdmin.getMahasiswa() + "'"));
+            } catch (SQLException ex) {
+                Logger.getLogger(c_admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

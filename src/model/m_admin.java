@@ -29,7 +29,7 @@ public class m_admin extends basemodel {
 
     @Override
     public boolean simpan(String query) throws SQLException {
-        String queri = "INSERT INTO "+query;
+        String queri = "INSERT INTO " + query;
         System.out.println(queri);
         return super.save(queri);
     }
@@ -43,10 +43,11 @@ public class m_admin extends basemodel {
 
     @Override
     public boolean hapus(String query) throws SQLException {
-        String queri = "DELETE FROM " + query ;
+        String queri = "DELETE FROM " + query;
         System.out.println(queri);
         return super.delete(queri);
     }
+
 
     public DefaultTableModel getTableModelBuku() throws SQLException {
         Object[] header = {"idBuku", "Kode Buku", "Judul Buku", "Pengarang", "Penerbit", "Tahun Terbit", "Kategori", "Stok"};
@@ -69,12 +70,54 @@ public class m_admin extends basemodel {
         return tableModel;
     }
 
+    public DefaultTableModel getTableModelBukuCari(String query) throws SQLException {
+        Object[] header = {"idBuku", "Kode Buku", "Judul Buku", "Pengarang", "Penerbit", "Tahun Terbit", "Kategori", "Stok"};
+        DefaultTableModel tableModel = new DefaultTableModel(null, header);
+
+        String sql = "SELECT b.idbuku, b.kode, b.judul, b.pengarang, b.penerbit, b.rilis, k.namakategori, b.stok\n"
+                + "	FROM public.buku b join kategori k on b.idkategori = k.idkategori where b.kode = "+query;
+        System.out.println(sql);
+        for (int i = tableModel.getRowCount() - 1; i >= 0; i--) {
+            tableModel.removeRow(i);
+        }
+        ResultSet rs = kon.getResult(sql);
+        while (rs.next()) {
+            String kolom[] = new String[8];
+            for (int i = 0; i < kolom.length; i++) {
+                kolom[i] = rs.getString(i + 1);
+            }
+            tableModel.addRow(kolom);
+        }
+        return tableModel;
+    }
+
     public DefaultTableModel getTableModelMahasiswa() throws SQLException {
         Object[] header = {"idMahasiswa", "NIM", "Nama", "Fakultas", "Tempat Lahir", "Tanggal Lahir"};
         DefaultTableModel tableModel = new DefaultTableModel(null, header);
 
         String sql = "SELECT m.idmahasiswa, m.nim, m.nama, f.fakultas, m.\"tempatLahir\", m.\"tanggalLahir\" \n"
                 + "	FROM public.mahasiswa m join namafakultas f on m.idfakultas = f.idfakultas";
+        System.out.println(sql);
+        for (int i = tableModel.getRowCount() - 1; i >= 0; i--) {
+            tableModel.removeRow(i);
+        }
+        ResultSet rs = kon.getResult(sql);
+        while (rs.next()) {
+            String kolom[] = new String[6];
+            for (int i = 0; i < kolom.length; i++) {
+                kolom[i] = rs.getString(i + 1);
+            }
+            tableModel.addRow(kolom);
+        }
+        return tableModel;
+    }
+    
+    public DefaultTableModel getTableModelMahasiswaCari(String query) throws SQLException {
+        Object[] header = {"idMahasiswa", "NIM", "Nama", "Fakultas", "Tempat Lahir", "Tanggal Lahir"};
+        DefaultTableModel tableModel = new DefaultTableModel(null, header);
+
+        String sql = "SELECT m.idmahasiswa, m.nim, m.nama, f.fakultas, m.\"tempatLahir\", m.\"tanggalLahir\" \n"
+                + "	FROM public.mahasiswa m join namafakultas f on m.idfakultas = f.idfakultas where nim = "+query;
         System.out.println(sql);
         for (int i = tableModel.getRowCount() - 1; i >= 0; i--) {
             tableModel.removeRow(i);

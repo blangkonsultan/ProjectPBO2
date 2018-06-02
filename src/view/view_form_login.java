@@ -37,9 +37,11 @@ public class view_form_login extends javax.swing.JFrame {
         TextField_Username = new javax.swing.JTextField();
         PasswordField_Password = new javax.swing.JPasswordField();
         Button_Login = new javax.swing.JButton();
+        Button_kembali = new javax.swing.JButton();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1000, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TextField_Username.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -66,9 +68,7 @@ public class view_form_login extends javax.swing.JFrame {
         });
         getContentPane().add(PasswordField_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 460, 160, 30));
 
-        Button_Login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/button_login.png"))); // NOI18N
-        Button_Login.setBorderPainted(false);
-        Button_Login.setContentAreaFilled(false);
+        Button_Login.setText("Login");
         Button_Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Button_LoginActionPerformed(evt);
@@ -79,7 +79,20 @@ public class view_form_login extends javax.swing.JFrame {
                 Button_LoginKeyPressed(evt);
             }
         });
-        getContentPane().add(Button_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 510, 100, 50));
+        getContentPane().add(Button_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 520, 70, 30));
+
+        Button_kembali.setText("Kembali");
+        Button_kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_kembaliActionPerformed(evt);
+            }
+        });
+        Button_kembali.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Button_kembaliKeyPressed(evt);
+            }
+        });
+        getContentPane().add(Button_kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 520, 80, 30));
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/form_login.png"))); // NOI18N
         Background.setMaximumSize(new java.awt.Dimension(1000, 600));
@@ -108,6 +121,14 @@ public class view_form_login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_TextField_UsernameKeyPressed
 
+    private void Button_kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_kembaliActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Button_kembaliActionPerformed
+
+    private void Button_kembaliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Button_kembaliKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Button_kembaliKeyPressed
+
     public String getUser() {
         return TextField_Username.getText();
     }
@@ -125,11 +146,15 @@ public class view_form_login extends javax.swing.JFrame {
     public void loginListener(ActionListener l) {
         this.Button_Login.addActionListener(l);
     }
-
+    
+    public void kembaliLoginListener(ActionListener l) {
+        this.Button_kembali.addActionListener(l);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
     private javax.swing.JButton Button_Login;
+    private javax.swing.JButton Button_kembali;
     private javax.swing.JPasswordField PasswordField_Password;
     private javax.swing.JTextField TextField_Username;
     // End of variables declaration//GEN-END:variables

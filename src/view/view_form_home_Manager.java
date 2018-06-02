@@ -6,6 +6,7 @@
 package view;
 
 import java.awt.event.ActionListener;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -56,6 +57,8 @@ public class view_form_home_Manager extends javax.swing.JFrame {
         Button_CetakMahasiswa = new javax.swing.JButton();
         Button_SegarkanMahasiswa = new javax.swing.JButton();
         Button_Logout = new javax.swing.JButton();
+        sessionManager = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -316,11 +319,25 @@ public class view_form_home_Manager extends javax.swing.JFrame {
         });
         getContentPane().add(Button_Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 110, 70, -1));
 
+        sessionManager.setText(" ");
+        getContentPane().add(sessionManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 50, -1));
+
+        jLabel1.setText("Manager :");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/form_home_admin.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public String getSessionManager() {
+        return sessionManager.getText();
+    }
+
+    public void setSessionManager(String sessionManager) {
+        this.sessionManager.setText(sessionManager);
+    }
 
     public void setTabelBuku(DefaultTableModel tabel) {
         this.Table_DataBuku.setModel(tabel);
@@ -459,10 +476,12 @@ public class view_form_home_Manager extends javax.swing.JFrame {
     private javax.swing.JTextField TextField_Peminjaman;
     private javax.swing.JTextField TextField_cariMahasiswa;
     private javax.swing.JLabel background;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel sessionManager;
     // End of variables declaration//GEN-END:variables
 }

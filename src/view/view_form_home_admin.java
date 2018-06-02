@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,6 +26,14 @@ public class view_form_home_admin extends javax.swing.JFrame {
     public view_form_home_admin() {
         initComponents();
         setLocationRelativeTo(this);
+    }
+
+    public String getSessionAdmin() {
+        return sessionAdmin.getText();
+    }
+
+    public void setSessionAdmin(String sessionAdmin) {
+        this.sessionAdmin.setText(sessionAdmin);
     }
 
     /**
@@ -64,6 +73,8 @@ public class view_form_home_admin extends javax.swing.JFrame {
         Button_CetakMahasiswa = new javax.swing.JButton();
         Button_SegarkanMahasiswa = new javax.swing.JButton();
         Button_Logout = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        sessionAdmin = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -370,16 +381,26 @@ public class view_form_home_admin extends javax.swing.JFrame {
         });
         getContentPane().add(Button_Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 110, 70, -1));
 
+        jLabel1.setText("Admin :");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        sessionAdmin.setText(" ");
+        getContentPane().add(sessionAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 50, -1));
+
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/form_home_admin.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public String getMahasiswa() {
+        return TextField_cariMahasiswa.getText();
+    }
+
     public void setTabelBuku(DefaultTableModel tabel) {
         this.Table_DataBuku.setModel(tabel);
     }
-    
+
     public void setTabelMahasiswa(DefaultTableModel tabel) {
         this.Table_DataMahasiswa.setModel(tabel);
     }
@@ -443,6 +464,11 @@ public class view_form_home_admin extends javax.swing.JFrame {
     public void EditPeminjamanListener(ActionListener l) {
         this.Button_EditPeminjaman.addActionListener(l);
     }
+
+    public String getBuku() {
+        return TextField_Buku.getText();
+    }
+
     private void TextField_BukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_BukuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextField_BukuActionPerformed
@@ -456,15 +482,15 @@ public class view_form_home_admin extends javax.swing.JFrame {
     }//GEN-LAST:event_TextField_cariMahasiswaActionPerformed
 
     private void Button_EditBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EditBukuActionPerformed
-     
+
     }//GEN-LAST:event_Button_EditBukuActionPerformed
 
     private void Button_EditPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EditPeminjamanActionPerformed
-     
+
     }//GEN-LAST:event_Button_EditPeminjamanActionPerformed
 
     private void Button_EditMahasiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EditMahasiswaActionPerformed
-    
+
     }//GEN-LAST:event_Button_EditMahasiswaActionPerformed
 
     private void Button_CetakMahasiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CetakMahasiswaActionPerformed
@@ -500,41 +526,6 @@ public class view_form_home_admin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Button_SegarkanBukuActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(view_form_home_admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(view_form_home_admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(view_form_home_admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(view_form_home_admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new view_form_home_admin().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button_CetakBuku;
@@ -561,10 +552,12 @@ public class view_form_home_admin extends javax.swing.JFrame {
     private javax.swing.JTextField TextField_Peminjaman;
     private javax.swing.JTextField TextField_cariMahasiswa;
     private javax.swing.JLabel background;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel sessionAdmin;
     // End of variables declaration//GEN-END:variables
 }
