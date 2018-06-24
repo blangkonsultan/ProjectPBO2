@@ -78,7 +78,7 @@ public class c_form_login {
         public void actionPerformed(ActionEvent e) {
             try {
                 new c_form_login(viewHome, modelLogin);
-                viewLogin.dispose();
+                viewDaftar.dispose();
             } catch (SQLException ex) {
                 Logger.getLogger(c_form_login.class.getName()).log(Level.SEVERE, null, ex);
             }
