@@ -7,6 +7,10 @@ package view;
 
 import com.toedter.calendar.JYearChooser;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Year;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -311,8 +315,8 @@ public class view_dialog_kelolaBuku extends java.awt.Dialog {
         this.TextField_Stok.setText(value);
     }
 
-    public void setYearChooser_TahunTerbitBuku(String value) {
-        this.YearChooser_TahunTerbitBuku.setYear(Integer.parseInt(value));
+    public void setYearChooser_TahunTerbitBuku(String tahun) throws ParseException {
+        this.YearChooser_TahunTerbitBuku.setYear(Integer.parseInt(tahun));
     }
 
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog

@@ -405,6 +405,10 @@ public class view_form_home_admin extends javax.swing.JFrame {
         this.Table_DataMahasiswa.setModel(tabel);
     }
 
+    public void setTabelPeminjaman(DefaultTableModel tabel) {
+        this.Table_DataPeminjaman.setModel(tabel);
+    }
+
     public int getSelectedRow() {
         return Table_DataBuku.getSelectedRow();
     }
@@ -467,6 +471,10 @@ public class view_form_home_admin extends javax.swing.JFrame {
 
     public String getBuku() {
         return TextField_Buku.getText();
+    }
+
+    public String getPeminjaman() {
+        return TextField_Peminjaman.getText();
     }
 
     private void TextField_BukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_BukuActionPerformed

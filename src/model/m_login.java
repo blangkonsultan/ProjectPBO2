@@ -40,7 +40,6 @@ public class m_login extends basemodel {
         rs.next();
         level = Integer.valueOf(rs.getString(1));
         return level;
-
     }
 
     public int login(String username, String password) throws SQLException {
@@ -74,6 +73,17 @@ public class m_login extends basemodel {
             a++;
         }
         return kategori;
+    }
+
+    public void getidBuku(String kodeBuku) throws SQLException {
+        String query = "SELECT idbuku FROM public.buku \n"
+                + "where kode = '" + kodeBuku + "';";
+        ResultSet rs = con.getResult(query);
+        while (rs.next()) {
+            c_form_login.setIdLogin(rs.getString("idUser"));
+            c_form_login.setUserLogin(rs.getString("nama"));
+        }
+
     }
 
     @Override

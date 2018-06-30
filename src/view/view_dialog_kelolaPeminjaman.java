@@ -5,11 +5,20 @@
  */
 package view;
 
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Bagas
  */
 public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
+
+    String tanggalPinjam, tanggalBalik;
 
     /**
      * Creates new form dialog_kelolaBuku
@@ -18,6 +27,56 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(this);
+    }
+
+    public void buttonEdit(boolean status) {
+        this.Button_Perbarui.setEnabled(status);
+    }
+
+    public void buttonSimpan(boolean status) {
+        this.Button_Simpan.setEnabled(status);
+    }
+
+    public void setTabel(DefaultTableModel tabel) {
+        this.Table_DataPeminjaman.setModel(tabel);
+    }
+
+    public int getSelectedRow() {
+        return Table_DataPeminjaman.getSelectedRow();
+    }
+
+    public String getValueAt(int baris, int kolom) {
+        return (String) this.Table_DataPeminjaman.getValueAt(baris, kolom);
+    }
+
+    public void simpanKelolaPeminjamanListener(ActionListener l) {
+        this.Button_Simpan.addActionListener(l);
+    }
+
+    public void segarkanKelolaPeminjamanListener(ActionListener l) {
+        this.Button_Segarkan.addActionListener(l);
+    }
+
+    public void hapusKelolaPeminjamanListener(ActionListener l) {
+        this.Button_Hapus.addActionListener(l);
+    }
+
+    public void perbaruiKelolaPeminjamanListener(ActionListener l) {
+        this.Button_Perbarui.addActionListener(l);
+    }
+
+    public void pilihKelolaPeminjamanListener(ActionListener l) {
+        this.Button_pilih.addActionListener(l);
+    }
+
+    public void setComboBox_Statuspinjam(String[] ComboBox_KategoriBuku) {
+        for (String a : ComboBox_KategoriBuku) {
+            this.ComboBox_StatusPinjam.addItem(a);
+        }
+    }
+
+    public String getComboBox_Statuspinjam() {
+        return ComboBox_StatusPinjam.getSelectedItem().toString();
     }
 
     /**
@@ -33,7 +92,7 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         TextField_NIM = new javax.swing.JTextField();
-        TextField_IdBuku = new javax.swing.JTextField();
+        TextField_kodeBuku = new javax.swing.JTextField();
         Button_Perbarui = new javax.swing.JButton();
         Button_Simpan = new javax.swing.JButton();
         Button_Hapus = new javax.swing.JButton();
@@ -65,7 +124,7 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("Id Buku");
+        jLabel3.setText("kode Buku");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -79,12 +138,12 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
         });
         jPanel1.add(TextField_NIM, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 160, -1));
 
-        TextField_IdBuku.addKeyListener(new java.awt.event.KeyAdapter() {
+        TextField_kodeBuku.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                TextField_IdBukuKeyTyped(evt);
+                TextField_kodeBukuKeyTyped(evt);
             }
         });
-        jPanel1.add(TextField_IdBuku, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 160, -1));
+        jPanel1.add(TextField_kodeBuku, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 160, -1));
 
         Button_Perbarui.setText("Perbarui");
         jPanel1.add(Button_Perbarui, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
@@ -101,13 +160,24 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Tanggal Pengembalian");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+
+        DateChooser_TanggalPinjam.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                DateChooser_TanggalPinjamPropertyChange(evt);
+            }
+        });
         jPanel1.add(DateChooser_TanggalPinjam, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 120, -1));
+
+        DateChooser_TanggalPengembalian.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                DateChooser_TanggalPengembalianPropertyChange(evt);
+            }
+        });
         jPanel1.add(DateChooser_TanggalPengembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 120, -1));
 
         jLabel1.setText("Status");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
-        ComboBox_StatusPinjam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sudah Dikembalikan", "Belum Dikembalikan", " " }));
         jPanel1.add(ComboBox_StatusPinjam, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 120, -1));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 270, 320));
@@ -192,29 +262,63 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
         }
     }//GEN-LAST:event_TextField_NIMKeyTyped
 
-    private void TextField_IdBukuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_IdBukuKeyTyped
+    private void TextField_kodeBukuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_kodeBukuKeyTyped
         if (!Character.isAlphabetic(evt.getKeyChar()) && !Character.isDigit(evt.getKeyChar())) {
             evt.consume();
         }
-    }//GEN-LAST:event_TextField_IdBukuKeyTyped
+    }//GEN-LAST:event_TextField_kodeBukuKeyTyped
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                view_dialog_kelolaPeminjaman dialog = new view_dialog_kelolaPeminjaman(new java.awt.Frame(), true);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
-//            }
-//        });
-//    }
+    private void DateChooser_TanggalPinjamPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_DateChooser_TanggalPinjamPropertyChange
+        if (DateChooser_TanggalPinjam.getDate() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            tanggalPinjam = sdf.format(DateChooser_TanggalPinjam.getDate());
+            System.out.println(tanggalPinjam);
+    }//GEN-LAST:event_DateChooser_TanggalPinjamPropertyChange
+    }
 
+    private void DateChooser_TanggalPengembalianPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_DateChooser_TanggalPengembalianPropertyChange
+        if (DateChooser_TanggalPengembalian.getDate() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            tanggalBalik = sdf.format(DateChooser_TanggalPengembalian.getDate());
+            System.out.println(tanggalBalik);
+        }
+    }//GEN-LAST:event_DateChooser_TanggalPengembalianPropertyChange
+
+    public String getTanggalPinjam() {
+        return tanggalPinjam;
+    }
+
+    public void setTanggalPinjam(String tanggalPinjam) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf.parse(tanggalPinjam);
+        this.DateChooser_TanggalPinjam.setDate(date);
+    }
+
+    public String getTanggalPengembalian() {
+        return tanggalBalik;
+    }
+
+    public void setTanggalPengembalian(String tanggalBalik) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf.parse(tanggalBalik);
+        this.DateChooser_TanggalPengembalian.setDate(date);
+    }
+
+    public String getTextField_NIM() {
+        return TextField_NIM.getText();
+    }
+
+    public void setTextField_NIM(String TextField_NIM) {
+        this.TextField_NIM.setText(TextField_NIM);;
+    }
+
+    public String getTextField_kodeBuku() {
+        return TextField_kodeBuku.getText();
+    }
+
+    public void setTextField_kodeBuku(String TextField_kodeBuku) {
+        this.TextField_kodeBuku.setText(TextField_kodeBuku);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
@@ -227,8 +331,8 @@ public class view_dialog_kelolaPeminjaman extends java.awt.Dialog {
     private com.toedter.calendar.JDateChooser DateChooser_TanggalPengembalian;
     private com.toedter.calendar.JDateChooser DateChooser_TanggalPinjam;
     private javax.swing.JTable Table_DataPeminjaman;
-    private javax.swing.JTextField TextField_IdBuku;
     private javax.swing.JTextField TextField_NIM;
+    private javax.swing.JTextField TextField_kodeBuku;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

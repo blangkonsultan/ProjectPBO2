@@ -7,7 +7,9 @@ package view;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -303,16 +305,17 @@ public class view_dialog_kelolaMahasiswa extends java.awt.Dialog {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             tanggalLahir = sdf.format(DateChooser_TanggalLahir.getDate());
             System.out.println(tanggalLahir);
-        }  
+        }
     }//GEN-LAST:event_DateChooser_TanggalLahirPropertyChange
-
 
     public String getTanggalLahir() {
         return tanggalLahir;
     }
 
-    public void setTanggalLahir(String tanggalLahir) {
-        this.DateChooser_TanggalLahir.setDateFormatString(tanggalLahir);
+    public void setTanggalLahir(String tanggalLahir) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf.parse(tanggalLahir);
+        this.DateChooser_TanggalLahir.setDate(date);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

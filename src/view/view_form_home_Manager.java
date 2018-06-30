@@ -347,6 +347,10 @@ public class view_form_home_Manager extends javax.swing.JFrame {
         this.Table_DataMahasiswa.setModel(tabel);
     }
 
+    public void setTabelPeminjaman(DefaultTableModel tabel) {
+        this.Table_DataPeminjaman.setModel(tabel);
+    }
+
     public void CetakBukuListener(ActionListener l) {
         this.Button_CetakBuku.addActionListener(l);
     }

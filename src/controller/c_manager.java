@@ -30,6 +30,7 @@ public class c_manager {
         viewManager.setSessionManager(login.getUserLogin());
         viewManager.setTabelBuku(modelManager.getTableModelBuku());
         viewManager.setTabelMahasiswa(modelManager.getTableModelMahasiswa());
+        viewManager.setTabelPeminjaman(modelManager.getTableModelPeminjaman());
         viewManager.CetakBukuListener(new CetakBukuListener());
         viewManager.CetakMahasiswaListener(new CetakMahasiswaListener());
         viewManager.CetakPeminjamanListener(new CetakPeminjamanListener());
